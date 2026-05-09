@@ -3,9 +3,12 @@ import logging
 warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd
+import yaml
+from dotenv import load_dotenv
+import os
+import dagshub
 import mlflow
 import mlflow.sklearn
-logging.getLogger("mlflow").setLevel(logging.ERROR)
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
@@ -13,17 +16,15 @@ from sklearn.metrics import (
     accuracy_score, roc_auc_score,
     f1_score, precision_score, recall_score
 )
-import yaml
-from dotenv import load_dotenv
-import os
+logging.getLogger("mlflow").setLevel(logging.ERROR)
 
 load_dotenv()
 
-# MLflow Tracking URI (Local SQLite)
-mlflow.set_tracking_uri("sqlite:///mlflow.db")
+# Initialize DagsHub
+dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
 
 # Params load
-params = yaml.safe_load(open("../params.yml"))
+params = yaml.safe_load(open("params.yml"))
 
 
 def train():
