@@ -1,11 +1,24 @@
+from dotenv import load_dotenv
+import os
+import sys
+
+# Fix for Windows terminal emoji printing error
+os.environ['PYTHONIOENCODING'] = 'utf-8'
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+
+load_dotenv()
+
+# Explicitly set credentials for MLflow artifact storage
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME', 'Muneebkhan1457')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD', 'ab7b436dbc3d1c4caf44d2d81a8f5d27a7e903ad')
+
 import warnings
 import logging
 warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd
 import yaml
-from dotenv import load_dotenv
-import os
 import dagshub
 import mlflow
 import mlflow.sklearn
@@ -18,10 +31,9 @@ from sklearn.metrics import (
 )
 logging.getLogger("mlflow").setLevel(logging.ERROR)
 
-load_dotenv()
-
 # Initialize DagsHub
 dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/Muneebkhan1457/Teleco-Customer-Churn-.mlflow")
 
 # Params load
 params = yaml.safe_load(open("params.yml"))
@@ -95,7 +107,22 @@ def train():
             mlflow.log_metric("precision", precision)
             mlflow.log_metric("recall", recall)
 
-            mlflow.sklearn.log_model(model, name="model")
+            # --- Manual Model Save & Upload ---
+            import shutil
+            model_path = f"temp_model_{model_name}"
+            if os.path.exists(model_path):
+                shutil.rmtree(model_path)
+            
+            mlflow.sklearn.save_model(model, path=model_path)
+            mlflow.log_artifacts(model_path, artifact_path="model")
+            
+            # Clean up local temp folder
+            shutil.rmtree(model_path)
+            
+            # --- TEST: Try to log a tiny text file ---
+            with open("test.txt", "w") as f:
+                f.write("Connection test")
+            mlflow.log_artifact("test.txt")
 
             # ── Print Results ────────────────────────────────────────────────
             print(f"Accuracy : {accuracy:.4f}")
