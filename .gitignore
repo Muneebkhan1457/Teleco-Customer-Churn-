@@ -1,0 +1,23 @@
+# MLflow
+mlruns/
+mlflow.db
+
+# Data
+data/
+
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+/mlruns
+
+
+# models
+models/
+
+#credentials
+.env
