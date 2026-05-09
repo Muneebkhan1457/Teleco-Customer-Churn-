@@ -36,7 +36,7 @@ dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', ml
 mlflow.set_tracking_uri("https://dagshub.com/Muneebkhan1457/Teleco-Customer-Churn-.mlflow")
 
 # Params load
-params = yaml.safe_load(open("params.yml"))
+params = yaml.safe_load(open("params.yaml"))
 
 
 def train():

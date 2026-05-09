@@ -1,0 +1,40 @@
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+      - src/data_ingestion.py
+    outs:
+      - data/raw/churn.csv
+
+  preprocessing:
+    cmd: python src/preprocessing.py
+    deps:
+      - src/preprocessing.py
+      - data/raw/churn.csv
+    params:
+      - data.test_size
+      - data.random_state
+    outs:
+      - data/processed/
+      - data_&_model/preprocessor.pkl
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/
+    params:
+      - model.random_state
+      - model.scale_pos_weight
+      - model.lr_max_iter
+      - model.rf_n_estimators
+      - model.xgb_n_estimators
+      - model.xgb_max_depth
+      - model.xgb_lr
+      - model.xgb_subsample
+      - model.xgb_colsample
+
+  best_model:
+    cmd: python src/best_model.py
+    deps:
+      - src/best_model.py

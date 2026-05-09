@@ -10,7 +10,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler, OrdinalEncoder
 from sklearn.model_selection import train_test_split
 
 # Params load
-params = yaml.safe_load(open("params.yml"))
+params = yaml.safe_load(open("params.yaml"))
 
 # Preprocessing: Load raw data, transform features, and save processed data
 def preprocessing():
