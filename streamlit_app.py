@@ -104,11 +104,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Load Model & Preprocessor (cached) ────────────────────────────────────────
-@st.cache_resource(show_spinner="Loading model from DagsHub...")
+@st.cache_resource(show_spinner="Loading model...")
 def load_artifacts():
-    dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
-    mlflow.set_tracking_uri("https://dagshub.com/Muneebkhan1457/Teleco-Customer-Churn-.mlflow")
-    model = mlflow.sklearn.load_model("models:/Telco-Churn-Model/latest")
+    model = mlflow.sklearn.load_model("data_&_model/best_model")
     with open("data_&_model/preprocessor.pkl", "rb") as f:
         preprocessor = pickle.load(f)
     return model, preprocessor

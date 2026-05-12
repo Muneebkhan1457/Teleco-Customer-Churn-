@@ -24,8 +24,8 @@ dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', ml
 mlflow.set_tracking_uri("https://dagshub.com/Muneebkhan1457/Teleco-Customer-Churn-.mlflow")
 
 # ── Load model & preprocessor at startup ─────────────────────────────────────
-print("Loading model from MLflow registry...")
-model = mlflow.sklearn.load_model("models:/Telco-Churn-Model/latest")
+print("Loading model from local path...")
+model = mlflow.sklearn.load_model("data_&_model/best_model")
 print("Model loaded!")
 
 print("Loading preprocessor...")
