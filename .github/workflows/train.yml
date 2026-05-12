@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 jobs:
@@ -12,48 +13,76 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
       MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
       MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
       MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
 
     steps:
-      # 1. Checkout Code
+
+      # ─────────────────────────────────────────────
+      # Checkout Repository
+      # ─────────────────────────────────────────────
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Setup Python
-      - name: 🐍 Set Up Python 3.10
+      # ─────────────────────────────────────────────
+      # Setup Python
+      # ─────────────────────────────────────────────
+      - name: 🐍 Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      # 3. Install Dependencies
+      # ─────────────────────────────────────────────
+      # Install Dependencies
+      # ─────────────────────────────────────────────
       - name: 📦 Install Dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      # 4. Configure DVC Remote credentials
+      # ─────────────────────────────────────────────
+      # Configure Git Identity
+      # ─────────────────────────────────────────────
+      - name: 🔧 Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      # ─────────────────────────────────────────────
+      # Configure DVC Remote Credentials
+      # ─────────────────────────────────────────────
       - name: 🔐 Configure DVC Remote Credentials
         run: |
           dvc remote modify origin --local auth basic
           dvc remote modify origin --local user ${{ secrets.MLFLOW_TRACKING_USERNAME }}
           dvc remote modify origin --local password ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
 
-      # 5. Pull DVC data (preprocessed/cached artifacts)
+      # ─────────────────────────────────────────────
+      # Pull Existing DVC Artifacts
+      # ─────────────────────────────────────────────
       - name: 📥 Pull DVC Artifacts
         run: dvc pull --force
         continue-on-error: true
 
-      # 6. Run full DVC pipeline
+      # ─────────────────────────────────────────────
+      # Run Full Pipeline
+      # ─────────────────────────────────────────────
       - name: ⚙️ Reproduce DVC Pipeline
         run: dvc repro
 
-      # 7. Push updated DVC artifacts
+      # ─────────────────────────────────────────────
+      # Push New DVC Artifacts
+      # ─────────────────────────────────────────────
       - name: 📤 Push DVC Artifacts
         run: dvc push
 
-      # 8. Commit updated dvc.lock back to repo
-      - name: 💾 Commit dvc.lock
+      # ─────────────────────────────────────────────
+      # Commit Updated dvc.lock
+      # ─────────────────────────────────────────────
+      - name: 💾 Commit Updated dvc.lock
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "CI: Update dvc.lock after pipeline run [skip ci]"
