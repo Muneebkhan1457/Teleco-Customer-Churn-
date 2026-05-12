@@ -15,6 +15,7 @@ os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD', '
 
 import warnings
 import logging
+os.environ["DAGSHUB_TOKEN"] = os.getenv("DAGSHUB_TOKEN", "")
 warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd

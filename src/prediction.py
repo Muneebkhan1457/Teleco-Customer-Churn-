@@ -4,6 +4,8 @@ import pickle
 import mlflow.sklearn
 import dagshub
 
+os.environ["DAGSHUB_TOKEN"] = os.getenv("DAGSHUB_TOKEN", "")
+
 # Initialize DagsHub
 dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
 

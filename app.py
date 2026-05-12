@@ -18,6 +18,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import warnings
 warnings.filterwarnings("ignore")
+    import os
+    os.environ["DAGSHUB_TOKEN"] = os.getenv("DAGSHUB_TOKEN", "")
 
 # ── DagsHub Init ──────────────────────────────────────────────────────────────
 dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
