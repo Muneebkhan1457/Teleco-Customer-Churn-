@@ -5,24 +5,24 @@ stages:
     deps:
     - path: src/data_ingestion.py
       hash: md5
-      md5: 0deb2b5e46af5f700d5f3019c4c7fbad
-      size: 967
+      md5: 8c1cc4a99fdfe72f0c39ad62bd456868
+      size: 929
     outs:
     - path: data/raw/churn.csv
       hash: md5
-      md5: 7f07de26b054de4c36eed95a1277fe21
-      size: 978285
+      md5: 8cac3095fcf1fdc5d276164ba877e721
+      size: 971241
   preprocessing:
     cmd: python src/preprocessing.py
     deps:
     - path: data/raw/churn.csv
       hash: md5
-      md5: 7f07de26b054de4c36eed95a1277fe21
-      size: 978285
+      md5: 8cac3095fcf1fdc5d276164ba877e721
+      size: 971241
     - path: src/preprocessing.py
       hash: md5
-      md5: da84cb09f628652e04dca2c73fd54773
-      size: 4340
+      md5: 4ec5f023d2b0093f7427bede760a53e9
+      size: 4233
     params:
       params.yaml:
         data.random_state: 42
@@ -30,8 +30,8 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 1959757843b87d55cf87db7a443d85d8.dir
-      size: 2275159
+      md5: 6d5a1557a06d83084be938b327c68d97.dir
+      size: 2268114
       nfiles: 4
     - path: data_&_model/preprocessor.pkl
       hash: md5
@@ -42,13 +42,13 @@ stages:
     deps:
     - path: data/processed/
       hash: md5
-      md5: 1959757843b87d55cf87db7a443d85d8.dir
-      size: 2275159
+      md5: 6d5a1557a06d83084be938b327c68d97.dir
+      size: 2268114
       nfiles: 4
     - path: src/train.py
       hash: md5
-      md5: 82899d1708d13024094741e336797d25
-      size: 5925
+      md5: 3dc1f78ddce043482edb3d0b38f8c72a
+      size: 11086
     params:
       params.yaml:
         model.lr_max_iter: 1000
@@ -65,5 +65,5 @@ stages:
     deps:
     - path: src/best_model.py
       hash: md5
-      md5: 99c9f7d03e5d491dce6f7dbc6227859f
-      size: 2466
+      md5: 88f964c91c3e4b4202ac1c29d988ed76
+      size: 2526
