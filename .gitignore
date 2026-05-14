@@ -21,3 +21,6 @@ models/
 
 #credentials
 .env
+
+# Models and artifacts
+data_&_model/best_model/
