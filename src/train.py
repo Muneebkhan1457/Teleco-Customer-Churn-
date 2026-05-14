@@ -21,7 +21,6 @@ load_dotenv()
 # Secure Environment Variables
 os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME", "")
 os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD", "")
-os.environ["DAGSHUB_TOKEN"] = os.getenv("DAGSHUB_TOKEN", "")
 
 # ─────────────────────────────────────────────────────────────
 # Suppress Warnings & Logs
@@ -184,17 +183,6 @@ def train():
 
             # Cleanup
             shutil.rmtree(model_path)
-
-            # ────────────────────────────────────────────────
-            # Test Artifact Upload
-            # ────────────────────────────────────────────────
-            with open("test.txt", "w") as f:
-                f.write("Connection successful!")
-
-            mlflow.log_artifact("test.txt")
-
-            if os.path.exists("test.txt"):
-                os.remove("test.txt")
 
             # ────────────────────────────────────────────────
             # Print Results

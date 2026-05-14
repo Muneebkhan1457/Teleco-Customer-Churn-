@@ -5,8 +5,8 @@ import sys
 os.environ['PYTHONIOENCODING'] = 'utf-8'
 load_dotenv()
 
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME', 'Muneebkhan1457')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD', 'ab7b436dbc3d1c4caf44d2d81a8f5d27a7e903ad')
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME', '')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD', '')
 os.environ["DAGSHUB_TOKEN"] = os.getenv("DAGSHUB_TOKEN", "")
 import pickle
 import numpy as np

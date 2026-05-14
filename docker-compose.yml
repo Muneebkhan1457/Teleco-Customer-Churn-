@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # FastAPI Prediction API
+  api:
+    build: .
+    container_name: telco-churn-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONIOENCODING=utf-8
+    restart: always
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
+
+  # Streamlit Dashboard
+  dashboard:
+    build: .
+    container_name: telco-churn-dashboard
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      - PYTHONIOENCODING=utf-8
+    restart: always
+    command: streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0
