@@ -53,7 +53,7 @@ stages:
       params.yaml:
         model.lr_max_iter: 1000
         model.random_state: 45
-        model.rf_n_estimators: 300
+        model.rf_n_estimators: 310
         model.scale_pos_weight: 2.77
         model.xgb_colsample: 0.8
         model.xgb_lr: 0.05
