@@ -103,6 +103,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote remove hf || true
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
           git remote add hf https://iblamemoonoxx:${HF_TOKEN}@huggingface.co/spaces/iblamemoonoxx/Teleco-Communication-Churn
           git push hf main --force
