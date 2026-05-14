@@ -47,8 +47,8 @@ stages:
       nfiles: 4
     - path: src/train.py
       hash: md5
-      md5: 3dc1f78ddce043482edb3d0b38f8c72a
-      size: 11086
+      md5: 4746b2c40553db20a8eda9cbaa9fe46a
+      size: 10449
     params:
       params.yaml:
         model.lr_max_iter: 1000
@@ -65,5 +65,5 @@ stages:
     deps:
     - path: src/best_model.py
       hash: md5
-      md5: 88f964c91c3e4b4202ac1c29d988ed76
-      size: 2526
+      md5: c9928686a5c3d7dcb36f6548a87a5af8
+      size: 2411
