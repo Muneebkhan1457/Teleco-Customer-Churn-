@@ -65,5 +65,11 @@ stages:
     deps:
     - path: src/best_model.py
       hash: md5
-      md5: 24714a58602cf50b27382d96747e334e
-      size: 2404
+      md5: 3231f10e5f3a7bed2749b88c0515452d
+      size: 3051
+    outs:
+    - path: data_&_model/best_model
+      hash: md5
+      md5: 7b73dceeeec7e0d94ba4d3cb8ef224a6.dir
+      size: 934989
+      nfiles: 5
