@@ -87,6 +87,8 @@ jobs:
           git lfs track "*.csv"
           git add .gitattributes
           
+          # Force add the ignored model files just for Hugging Face
+          git add -f "data_&_model/"
           git add .
           git commit -m "Deploy from CI/CD: $(date)"
           git push hf master:main --force
