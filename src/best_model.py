@@ -10,6 +10,7 @@ from mlflow.tracking import MlflowClient
 import dagshub
 
 # Initialize DagsHub
+dagshub.auth.add_app_token(os.environ["DAGSHUB_TOKEN"])
 dagshub.init(repo_owner='Muneebkhan1457', repo_name='Teleco-Customer-Churn-', mlflow=True)
 mlflow.set_tracking_uri("https://dagshub.com/Muneebkhan1457/Teleco-Customer-Churn-.mlflow")
 
