@@ -65,7 +65,7 @@ def preprocessing():
     # ── Preprocessor ──────────────────────────────────────────────────────────
     preprocessor = ColumnTransformer([
         ("binary", OrdinalEncoder(), binary_cols),
-        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_cols),
+        ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), categorical_cols),
         ("scaled_num", StandardScaler(), numeric_cols),
         ("pass", "passthrough", pass_through_cols)
     ])
