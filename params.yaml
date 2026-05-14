@@ -10,7 +10,7 @@ model:
   lr_max_iter: 1000
 
   # Random Forest
-  rf_n_estimators: 300
+  rf_n_estimators: 310
 
   # XGBoost
   xgb_n_estimators: 400
