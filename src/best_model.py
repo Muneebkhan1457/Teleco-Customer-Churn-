@@ -75,7 +75,7 @@ def register_best_model():
             import shutil
             shutil.rmtree(local_path)
             
-        mlflow.sklearn.download_artifacts(run_id=best_run_id, path="model", dst_path="data_&_model")
+        mlflow.artifacts.download_artifacts(run_id=best_run_id, artifact_path="model", dst_path="data_&_model")
         # Rename downloaded 'model' folder to 'best_model'
         os.rename("data_&_model/model", local_path)
         print(f"✅ Model downloaded to {local_path}")
