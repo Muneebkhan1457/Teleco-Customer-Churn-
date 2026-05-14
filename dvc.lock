@@ -25,12 +25,12 @@ stages:
       size: 4584
     params:
       params.yaml:
-        data.random_state: 42
+        data.random_state: 44
         data.test_size: 0.2
     outs:
     - path: data/processed/
       hash: md5
-      md5: ee3c2757f3b3a0d19e41a497c809b62a.dir
+      md5: 4c30f779d12d839c25e3130c4160e500.dir
       size: 2268114
       nfiles: 4
     - path: data_&_model/preprocessor.pkl
@@ -42,7 +42,7 @@ stages:
     deps:
     - path: data/processed/
       hash: md5
-      md5: ee3c2757f3b3a0d19e41a497c809b62a.dir
+      md5: 4c30f779d12d839c25e3130c4160e500.dir
       size: 2268114
       nfiles: 4
     - path: src/train.py
@@ -52,7 +52,7 @@ stages:
     params:
       params.yaml:
         model.lr_max_iter: 1000
-        model.random_state: 42
+        model.random_state: 44
         model.rf_n_estimators: 300
         model.scale_pos_weight: 2.77
         model.xgb_colsample: 0.8
