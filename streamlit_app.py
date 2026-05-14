@@ -131,7 +131,7 @@ with st.sidebar:
     )
     st.markdown("---")
     st.markdown("### 🧠 Model Info")
-    st.markdown("- **Model:** Logistic Regression (Best ROC-AUC)")
+    st.markdown("- **Model:** Best Model from Registry")
     st.markdown("- **Registry:** DagsHub MLflow")
     st.markdown("- **Pipeline:** DVC Automated")
     st.markdown("---")
@@ -192,7 +192,7 @@ with col_right:
     with m1:
         st.markdown('<div class="metric-card"><h3>7043</h3><p>Customers Trained On</p></div>', unsafe_allow_html=True)
     with m2:
-        st.markdown('<div class="metric-card"><h3>84.9%</h3><p>ROC-AUC Score</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-card"><h3>Top</h3><p>ROC-AUC Performance</p></div>', unsafe_allow_html=True)
     with m3:
         st.markdown('<div class="metric-card"><h3>4</h3><p>Models Compared</p></div>', unsafe_allow_html=True)
 

@@ -66,11 +66,17 @@ def preprocessing():
     preprocessor = ColumnTransformer([
         ("binary", OrdinalEncoder(), binary_cols),
         ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_cols),
-        ("num", StandardScaler(), numeric_cols),
+        ("scaled_num", StandardScaler(), numeric_cols),
         ("pass", "passthrough", pass_through_cols)
     ])
 
+    # Ensure output is a DataFrame
+    preprocessor.set_output(transform="pandas")
+
     x = preprocessor.fit_transform(x)
+
+    # ── Re-fill nulls in scaled column (specific user fix) ────────────────────
+    x['scaled_num__TotalCharges'] = x['scaled_num__TotalCharges'].fillna(x['scaled_num__TotalCharges'].median())
 
     print(f"After preprocessing — Shape: {x.shape}")
 
