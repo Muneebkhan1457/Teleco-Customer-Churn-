@@ -103,5 +103,6 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add hf https://iblamemoonoxx:$HF_TOKEN@huggingface.co/spaces/iblamemoonoxx/Teleco-Communication-Churn
-          git push --force hf main
+          git remote remove hf || true
+          git remote add hf https://iblamemoonoxx:${HF_TOKEN}@huggingface.co/spaces/iblamemoonoxx/Teleco-Communication-Churn
+          git push hf main --force
