@@ -38,3 +38,5 @@ stages:
     cmd: python src/best_model.py
     deps:
       - src/best_model.py
+    outs:
+      - data_&_model/best_model

@@ -65,8 +65,23 @@ def register_best_model():
         print(f"Registering model from run {best_run_id}...")
         result = mlflow.register_model(model_uri, model_name)
         print(f"Successfully registered model '{model_name}' (Version {result.version})")
+        
+        # 4. DOWNLOAD the model locally for Hugging Face/Docker
+        print("Downloading best model to data_&_model/best_model...")
+        local_path = "data_&_model/best_model"
+        
+        # Clean up old model if it exists
+        if os.path.exists(local_path):
+            import shutil
+            shutil.rmtree(local_path)
+            
+        mlflow.sklearn.download_artifacts(run_id=best_run_id, path="model", dst_path="data_&_model")
+        # Rename downloaded 'model' folder to 'best_model'
+        os.rename("data_&_model/model", local_path)
+        print(f"✅ Model downloaded to {local_path}")
+
     except Exception as e:
-        print(f"Error registering model: {e}")
+        print(f"Error during registration/download: {e}")
 
 if __name__ == "__main__":
     register_best_model()
