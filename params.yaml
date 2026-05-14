@@ -1,9 +1,9 @@
 data:
   test_size: 0.2
-  random_state: 42
+  random_state: 44
 
 model:
-  random_state: 42
+  random_state: 44
   scale_pos_weight: 2.77   # ratio of No/Yes from training set
 
   # Logistic Regression
