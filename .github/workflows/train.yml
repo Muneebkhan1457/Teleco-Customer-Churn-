@@ -73,7 +73,7 @@ jobs:
         run: |
           # Verify model exists before pushing
           echo "Checking model files..."
-          ls -R data_&_model/
+          ls -R "data_&_model/"
           
           rm -rf .git
           git init
