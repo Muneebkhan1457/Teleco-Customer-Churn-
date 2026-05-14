@@ -25,12 +25,12 @@ stages:
       size: 4584
     params:
       params.yaml:
-        data.random_state: 45
+        data.random_state: 50
         data.test_size: 0.2
     outs:
     - path: data/processed/
       hash: md5
-      md5: 39b21dc68c2c10cc97f672c68a2d4f77.dir
+      md5: 328b8eda0f35606c190693327386424b.dir
       size: 2268114
       nfiles: 4
     - path: data_&_model/preprocessor.pkl
@@ -42,7 +42,7 @@ stages:
     deps:
     - path: data/processed/
       hash: md5
-      md5: 39b21dc68c2c10cc97f672c68a2d4f77.dir
+      md5: 328b8eda0f35606c190693327386424b.dir
       size: 2268114
       nfiles: 4
     - path: src/train.py
@@ -52,13 +52,13 @@ stages:
     params:
       params.yaml:
         model.lr_max_iter: 1000
-        model.random_state: 45
+        model.random_state: 50
         model.rf_n_estimators: 320
         model.scale_pos_weight: 2.77
         model.xgb_colsample: 0.8
         model.xgb_lr: 0.05
         model.xgb_max_depth: 5
-        model.xgb_n_estimators: 400
+        model.xgb_n_estimators: 500
         model.xgb_subsample: 0.8
   best_model:
     cmd: python src/best_model.py
@@ -70,11 +70,11 @@ stages:
     params:
       params.yaml:
         model:
-          random_state: 45
+          random_state: 50
           scale_pos_weight: 2.77
           lr_max_iter: 1000
           rf_n_estimators: 320
-          xgb_n_estimators: 400
+          xgb_n_estimators: 500
           xgb_max_depth: 5
           xgb_lr: 0.05
           xgb_subsample: 0.8
@@ -82,6 +82,6 @@ stages:
     outs:
     - path: data_&_model/best_model
       hash: md5
-      md5: c0caed3ab0e23b27f8ba4ced9886f263.dir
+      md5: ec5b3aebeb1fc84d5d079d0f00e065f0.dir
       size: 2052
       nfiles: 5
